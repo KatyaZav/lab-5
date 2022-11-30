@@ -78,6 +78,25 @@ public class YGManager : MonoBehaviour
 
 
 ```c#
+public static void EndGame()
+    {
+        if (GameCount > YG.YandexGame.savesData.RecordCount)
+        {
+            YG.YandexGame.savesData.RecordCount = GameCount;
+
+            Debug.Log(YG.YandexGame.savesData.RecordCount);
+        }
+        
+        GameCount = 0;
+        LosePoints = 0;
+    }
+```
+
+
+```c#
+```
+
+```c#
 ```
 
 
