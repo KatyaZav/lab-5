@@ -140,7 +140,7 @@ YG.YandexGame.NewLeaderboardScores("TopRecordCountPlayers", YG.YandexGame.savesD
 ![фото](https://github.com/KatyaZav/lab-4/blob/main/Screens/3%20task/1.gif)
 
 ## Выводы
-
+Я впервые поработала с таблицой лидеров. Вспомнила, как делать облачные сохранения (правда с этим возникли сложности).
 
 
 ## Powered by
