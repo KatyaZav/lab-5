@@ -94,6 +94,7 @@ public static void EndGame()
 
 
 ```c#
+YG.YandexGame.NewLeaderboardScores("TopRecordCountPlayers", YG.YandexGame.savesData.RecordCount);
 ```
 
 ```c#
