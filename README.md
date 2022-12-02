@@ -47,7 +47,10 @@ SDK»
 5) Практическая работа «Интеграция системы достижений в проект»
 
 Ход работы:
-1) 
+1) Создать авторизацию пользователя на платформе.
+
+Нужно написать скрипт менеджера и повесить его на объект сцены.
+
 ```c#
 public class YGManager : MonoBehaviour
 {
@@ -72,10 +75,32 @@ public class YGManager : MonoBehaviour
 
 ```
 
+![Фото]()
 
+2) Сделать сохранение данных игрока.
 
-![Фото](https://github.com/KatyaZav/lab-4/blob/main/Screens/1%20task/1.gif)
+Отыскать класс Яндекса с информацией игрока. Добавлю необходимые мне переменные в этот скрипт.
 
+```c#
+namespace YG
+{
+    [System.Serializable]
+    public class SavesYG
+    {
+        public bool isFirstSession = true;
+        public string language = "ru";
+        public bool feedbackDone;
+        public bool promptDone;
+
+        // Ваши сохранения
+        public int RecordCount = 0;
+        public string newPlayerName = "Hello!";
+        public bool[] openLevels = new bool[3];
+    }
+}
+```
+
+Добавлю код с сохранением рекорда при окончании игры.
 
 ```c#
 public static void EndGame()
@@ -83,29 +108,67 @@ public static void EndGame()
         if (GameCount > YG.YandexGame.savesData.RecordCount)
         {
             YG.YandexGame.savesData.RecordCount = GameCount;
-
-            Debug.Log(YG.YandexGame.savesData.RecordCount);
+            YG.YandexGame.SaveProgress();
         }
         
         GameCount = 0;
         LosePoints = 0;
-    }
+    } 
 ```
 
+3) Реализовать вывод сохраненных данных в интерфейсе
+
+Создам UI элемент для вывода рекорда. При старте сцены сделаю обновление этого элемента.
+
+```c#
+Debug.Log(string.Format("Record: {0}", YG.YandexGame.savesData.RecordCount));
+if (YG.YandexGame.SDKEnabled == true)
+    UpdateRecord();
+else
+    text.text = "Рекорд не загружен";
+```
+
+Однако, если не добавить еще 1 строчку кода, то в меню будет висеть "Рекорд не загружен". 
+
+```c#
+private void OnEnable() => YG.YandexGame.GetDataEvent += UpdateRecord;
+```
+
+4) Реализовать таблицу лидеров.
+
+Добавилю упоминание о таблице лидеров на сайте Яндекс Игр.
+
+![Фото]()
+![Фото]()
+
+Добавлю эту строчку в скрипт с окончанием игры.
 
 ```c#
 YG.YandexGame.NewLeaderboardScores("TopRecordCountPlayers", YG.YandexGame.savesData.RecordCount);
 ```
 
+5) Добавить систему достижений
+
+У меня будет всего 3 достижения, причем одно из них получается, если получены оба других. Создам 2 булевские переменные, которые будут храниться в облаке, а при загрузке сцены использоваться.
+
 ```c#
+public class Achivements : MonoBehaviour
+{    
+    public GameObject GetGoldAchive;
+    public GameObject GetWasGame;
+    public GameObject GetAchives;
+
+    void Start()
+    {
+        if (YG.YandexGame.savesData.isGetGold)
+            GetGoldAchive.SetActive(true);
+        if (YG.YandexGame.savesData.isWasGame)
+            GetWasGame.SetActive(true);
+        if (YG.YandexGame.savesData.isWasGame && YG.YandexGame.savesData.isGetGold)
+            GetAchives.SetActive(true);
+    }
+}
 ```
-
-
-![Видео](https://github.com/KatyaZav/lab-4/blob/main/Screens/1%20task/3.gif)
-
-
-![Видео](https://github.com/KatyaZav/lab-4/blob/main/Screens/1%20task/4.1.jpg)
-
 
 
 ## Задание 2
@@ -120,10 +183,7 @@ YG.YandexGame.NewLeaderboardScores("TopRecordCountPlayers", YG.YandexGame.savesD
 - Таблицы лидеров
 - Промоакции
 - События, которые происходят при адблоке/читиринге
-
-
-
-![фото](https://github.com/KatyaZav/lab-4/blob/main/Screens/2%20task/1.jpg)
+- Внутриигровые покупки
 
 Ссылка на ЯндексИгры: https://yandex.ru/games/app/190276?draft=true&lang=ru.
 
@@ -131,17 +191,14 @@ YG.YandexGame.NewLeaderboardScores("TopRecordCountPlayers", YG.YandexGame.savesD
 ### Доработать стилистическое оформление списка лидеров и системы достижений, реализованных в задании 1.
 
 Ход работы:
-1) Дополнить код класса для слайдера-настройки звукового проигрывателя.
+1) Улучшить интерфейс системы достижений.
 
-```c#
-```
+После изменений все полученные достижения выглядят так.
+![Фото]()
 
-
-![фото](https://github.com/KatyaZav/lab-4/blob/main/Screens/3%20task/1.gif)
 
 ## Выводы
-Я впервые поработала с таблицой лидеров. Вспомнила, как делать облачные сохранения (правда с этим возникли сложности).
-
+Я впервые поработала с таблицой лидеров, реализовала достижения и испарвила несколько багов. Вспомнила, как делать облачные сохранения. 
 
 ## Powered by
 
