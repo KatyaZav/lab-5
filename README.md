@@ -75,7 +75,7 @@ public class YGManager : MonoBehaviour
 
 ```
 
-![Фото]()
+![Фото](https://github.com/KatyaZav/lab-5/blob/main/Screens/1.jpg)
 
 2) Сделать сохранение данных игрока.
 
@@ -138,8 +138,9 @@ private void OnEnable() => YG.YandexGame.GetDataEvent += UpdateRecord;
 
 Добавилю упоминание о таблице лидеров на сайте Яндекс Игр.
 
-![Фото]()
-![Фото]()
+![Фото](https://github.com/KatyaZav/lab-5/blob/main/Screens/2.jpg)
+
+![Фото](https://github.com/KatyaZav/lab-5/blob/main/Screens/2.2.jpg)
 
 Добавлю эту строчку в скрипт с окончанием игры.
 
@@ -185,8 +186,6 @@ public class Achivements : MonoBehaviour
 - События, которые происходят при адблоке/читиринге
 - Внутриигровые покупки
 
-Ссылка на ЯндексИгры: https://yandex.ru/games/app/190276?draft=true&lang=ru.
-
 ## Задание 3
 ### Доработать стилистическое оформление списка лидеров и системы достижений, реализованных в задании 1.
 
@@ -194,11 +193,13 @@ public class Achivements : MonoBehaviour
 1) Улучшить интерфейс системы достижений.
 
 После изменений все полученные достижения выглядят так.
-![Фото]()
+![Фото](https://github.com/KatyaZav/lab-5/blob/main/Screens/3.jpg)
 
 
 ## Выводы
 Я впервые поработала с таблицой лидеров, реализовала достижения и испарвила несколько багов. Вспомнила, как делать облачные сохранения. 
+
+Ссылка на ЯндексИгры: https://yandex.ru/games/app/190276?draft=true&lang=ru.
 
 ## Powered by
 
